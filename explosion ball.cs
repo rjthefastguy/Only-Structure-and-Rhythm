@@ -7,6 +7,7 @@ public class explosionball : MonoBehaviour
 
     public float speed;
     Renderer m_Renderer;
+    public float timer = 5f;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,7 +17,12 @@ public class explosionball : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position += transform.up * speed;
+        timer -= Time.deltaTime;
+        transform.position += transform.up * speed * Time.deltaTime;
+        if(timer <= 0)
+        {
+            Destroy(gameObject);
+        }
         if (!m_Renderer.isVisible)
         {
             Destroy(gameObject);

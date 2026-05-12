@@ -7,6 +7,7 @@ public class ObjectManager : MonoBehaviour
     // List to store all objects (active and inactive)
     public List<GameObject> allObjects = new List<GameObject>();
     private bool loop = false;
+    private float counter = 0;
 
     void Awake()
     {
@@ -21,6 +22,7 @@ public class ObjectManager : MonoBehaviour
 
     void Update()
     {
+        counter += Time.deltaTime;
         if(loop)
         {
             allObjects.RemoveAll( x => !x);
@@ -65,6 +67,12 @@ public class ObjectManager : MonoBehaviour
         // {
         //     Debug.LogWarning("Object not found: " + objectName);
         // }
+    }
+
+    public void Pause()
+    {
+        Debug.Break();
+        Debug.LogError("Pause at " + counter);
     }
 }
 

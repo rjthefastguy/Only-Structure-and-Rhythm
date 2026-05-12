@@ -2,23 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class TextUpdater : MonoBehaviour
 {
 
-    private Text HP;
-    private Player points;
+    private TMP_Text HP;
+    private MusicController points;
 
     void Start()
     {
-        points = GameObject.Find("Player").GetComponent<Player>();
-        HP = transform.GetComponentInChildren<Text>();
-        //Text sets your text to say this message
+        HP = transform.GetComponent<TMP_Text>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        HP.text = "HP: " + points.hitpoints.ToString(); 
+        points = GameObject.Find("Music Player").GetComponent<MusicController>();
+        //FormatProvider format = float.ToString(000.00);
+        HP.text = "StopWatch: " + points.stopwatch.ToString("N3");
     }
 }

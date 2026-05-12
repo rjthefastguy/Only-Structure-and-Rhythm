@@ -6,25 +6,25 @@ using UnityEngine.InputSystem;
 public class Movement : MonoBehaviour
 {
     [Header("Natural movement")]
-    [SerializeField] float speed = 5;
+    public float speed = 5;
     private Rigidbody2D rb;
     public Vector2 moveInput;
     [Header("Knockback")]
     private bool reset = false;
-    private bool noMove = false;
-    [SerializeField] float strength = 16, delay = 0.15f;
+    public bool noMove = false;
+    private float strength = 8, delay = 0.25f;
     private float timer;
     [Header("Dashing")]
-    private bool fast = true;
-    [SerializeField] float startDashTime = 0.5f;
-    [SerializeField] float dashSpeed = 10f;
+    public bool fast = true;
+    private float startDashTime = 0.5f;
+    private float dashSpeed = 10f;
     BoxCollider2D colliding;
     Player invincibility;
     TrailRender trail;
     private Particle Particle;
-    float currentDashTime;
-    bool canDash = true;
-    bool playerCollision = true;
+    private float currentDashTime;
+    private bool canDash = true;
+    //bool playerCollision = true;
     
 
     
@@ -52,13 +52,13 @@ public class Movement : MonoBehaviour
         currentDashTime -= Time.deltaTime;
         if(currentDashTime >  0)
         {
-            rb.velocity = moveInput * dashSpeed;
+            rb.velocity = moveInput * dashSpeed * Time.deltaTime;
         }
         if(currentDashTime < 0 && !canDash && !noMove)
         {
             trail.EndTrail();
             canDash = true;
-            playerCollision = true;
+            //playerCollision = true;
             invincibility.nohit = false;
             fast = true;
             rb.velocity = moveInput * speed;
@@ -115,7 +115,7 @@ public class Movement : MonoBehaviour
             Particle.Play();
             trail.StartTrail();
             canDash = false;
-            playerCollision = false;
+            //playerCollision = false;
             invincibility.nohit = true;
             fast = false;
             currentDashTime = startDashTime; // Reset the dash timer.
@@ -128,7 +128,7 @@ public class Movement : MonoBehaviour
         {
             if(fast)
             {
-                rb.velocity = moveInput * speed;
+                rb.velocity = moveInput * speed * Time.deltaTime;
             }
         }
     }

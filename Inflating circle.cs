@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class Inflatingcircle : MonoBehaviour
 {
-    [SerializeField] Vector3 scaleChange, scaleLinger;
-    [SerializeField] Vector3 radius;
+    private Vector3 scaleChange, scaleLinger;
+    private Vector3 radius;
     private bool timer = true;
     private bool grow = true;
     public bool fade = false;
+    public float change;
+    public float ling;
+    public float circle;
     public float fspeed;
     private float fadechange = 0;
     public bool raise = false;
@@ -17,26 +20,31 @@ public class Inflatingcircle : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        scaleChange = new Vector3(change,change,change);
+        scaleLinger = new Vector3(ling,ling,ling);
+        radius = new Vector3(circle,circle,circle);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(raise)
+        if(Time.timeScale != 0)
         {
-            if (grow && transform.localScale.y <= radius.y)
+            if(raise)
             {
-                show();
-            }
-            else if(timer)
-            {
+                if (grow && transform.localScale.y <= radius.y)
+                {
+                    show();
+                }
+                else if(timer)
+                {
 
-                linger();
-            }
-            else
-            {
-                hide();
+                    linger();
+                }
+                else
+                {
+                    hide();
+                }
             }
         }
     }

@@ -4,13 +4,25 @@ using UnityEngine;
 
 public class Star : MonoBehaviour
 {
-    public float rspeed = 20;
-    public float mspeed = 5;
+    public int rspeed = 20;
+    public int mspeed = 5;
+    public int min;
+    public int max;
+    public bool vertical = false;
+    public bool randspeed = false;
     Renderer m_Renderer;
     // Start is called before the first frame update
     void Start()
     {
-        m_Renderer = GetComponent<Renderer>();  
+        m_Renderer = GetComponent<Renderer>();
+        if(transform.parent != null)
+        {
+            if(randspeed)
+            {
+               mspeed = Random.Range(min,max); 
+            }
+            transform.parent = null;
+        }  
     }
 
     // Update is called once per frame
@@ -18,7 +30,14 @@ public class Star : MonoBehaviour
     {
         Vector3 pos = transform.position;
         transform.RotateAround(transform.position, Vector3.forward, rspeed * Time.deltaTime);
-        pos.x -= mspeed * Time.deltaTime;
+        if(vertical)
+        {
+            pos.y -= mspeed * Time.deltaTime;
+        }
+        else
+        {
+            pos.x -= mspeed * Time.deltaTime;
+        }
         transform.position = pos;
         if (!m_Renderer.isVisible)
         {

@@ -29,7 +29,7 @@ public class CameraMover : MonoBehaviour
         {
             cam.transform.position += cam.transform.right * speed;
             left.SetActive(true);
-            right.SetActive(false);
+            //right.SetActive(false);
             up.SetActive(true);
             down.SetActive(true);
         }
@@ -37,7 +37,7 @@ public class CameraMover : MonoBehaviour
         {
             cam.transform.position -= cam.transform.right * speed;
             right.SetActive(true);
-            left.SetActive(false);
+            //left.SetActive(false);
             up.SetActive(true);
             down.SetActive(true);
         }
@@ -47,7 +47,7 @@ public class CameraMover : MonoBehaviour
             down.SetActive(true);
             left.SetActive(true);
             right.SetActive(true);
-            up.SetActive(false);
+            //up.SetActive(false);
         }
         else if(direction == "d")
         {
@@ -55,14 +55,14 @@ public class CameraMover : MonoBehaviour
             up.SetActive(true);
             left.SetActive(true);
             right.SetActive(true);
-            down.SetActive(false);
+            //down.SetActive(false);
         }
         else
         {
-            up.SetActive(false);
-            right.SetActive(false);
-            left.SetActive(false);
-            down.SetActive(false);
+            //up.SetActive(false);
+            //right.SetActive(false);
+            //left.SetActive(false);
+            //down.SetActive(false);
         }
         
         if(reset)
@@ -71,12 +71,5 @@ public class CameraMover : MonoBehaviour
             cam.transform.position = new Vector3(0,0,-10);
             reset = false;
         }
-    }
-    void OnDisable()
-    {
-        up.SetActive(false);
-        right.SetActive(false);
-        left.SetActive(false);
-        down.SetActive(false);
     }
 }
